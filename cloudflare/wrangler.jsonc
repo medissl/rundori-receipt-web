@@ -1,0 +1,8 @@
+{
+ "$schema":"../node_modules/wrangler/config-schema.json",
+ "name":"rundori-photo-gateway","main":"worker.ts",
+ "compatibility_date":"2026-10-07","compatibility_flags":["nodejs_compat"],
+ "r2_buckets":[{"binding":"PHOTOS","bucket_name":"rundori-shoe-photos"}],
+ "observability":{"enabled":true,"head_sampling_rate":0.1,"redact_query_string":true,"logs":{"enabled":true,"invocation_logs":false}},
+ "workers_dev":true
+}
