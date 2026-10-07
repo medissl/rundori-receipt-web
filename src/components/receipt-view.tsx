@@ -128,14 +128,18 @@ export function ReceiptView({
             ditanyakan?
           </h2>
           <p>Tim Rundori siap membantu Anda.</p>
-            <a
-              href={whatsapp ? `https://wa.me/${whatsapp}?text=${encodeURIComponent(`Halo Rundori, saya ingin bertanya tentang pesanan ${r.receipt_number}.`)}` : 'https://wa.me/message/YGRSC4P2ZLWBI1?src=qr'}
-              className="button full"
-              rel="noreferrer"
-              target="_blank"
-            >
-              Hubungi via WhatsApp ↗
-            </a>
+          <a
+            href={
+              whatsapp
+                ? `https://wa.me/${whatsapp}?text=${encodeURIComponent(`Halo Rundori, saya ingin bertanya tentang pesanan ${r.receipt_number}.`)}`
+                : "https://wa.me/message/YGRSC4P2ZLWBI1?src=qr"
+            }
+            className="button full"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Hubungi via WhatsApp ↗
+          </a>
           <PrintButton />
         </section>
         <footer className="receipt-footer">
