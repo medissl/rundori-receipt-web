@@ -24,13 +24,16 @@ export default async function Order({
   const { data, error } = await client
     .from("receipts")
     .select(
-      "id,receipt_number,customer_name,phone,email,notes,internal_notes,status,payment_method,total,amount_paid,created_at,updated_at,confirmed_at,receipt_items(id,service_name,description,quantity,unit_price,position,item_photos(id,item_id,phase,object_key)),delivery_logs(id,channel,status,detail,created_at)",
+      "id,receipt_number,customer_name,phone,email,notes,internal_notes,status,payment_method,total,amount_paid,created_at,updated_at,confirmed_at,token_expires_at,receipt_items(id,service_name,description,quantity,unit_price,position,item_photos(id,item_id,phase,object_key)),delivery_logs(id,channel,status,detail,created_at)",
     )
     .eq("id", id)
     .single();
   if (error || !data) notFound();
   data.receipt_items.sort((a, b) => a.position - b.position);
   const r = await withPhotos(data as unknown as Receipt);
+  r.has_active_link =
+    !!data.token_expires_at &&
+    new Date(data.token_expires_at).getTime() > Date.now();
   return (
     <>
       <div className="page-heading">
@@ -39,14 +42,18 @@ export default async function Order({
           <h1>{r.customer_name}.</h1>
           <p>
             {dateLabel(r.created_at)} ·{" "}
-            {r.confirmed_at ? "Struk aktif" : "Draft · belum dikirim"}
+            {r.has_active_link
+              ? "Struk aktif"
+              : r.confirmed_at
+                ? "Link tidak aktif"
+                : "Draft · belum dikirim"}
           </p>
         </div>
         <span className={`badge ${r.status}`}>{statusLabel[r.status]}</span>
       </div>
       <details className="card edit-details">
         <summary>Edit detail pesanan & status</summary>
-        <OrderForm receipt={r} />
+        <OrderForm key={r.updated_at} receipt={r} />
       </details>
       <section className="card">
         <span className="eyebrow">02 / PHOTO DOCUMENTATION</span>

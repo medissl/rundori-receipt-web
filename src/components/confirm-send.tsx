@@ -92,7 +92,7 @@ export function ConfirmSend({
               setelah konfirmasi.
             </p>
           )}
-          {r.confirmed_at && (
+          {r.has_active_link && (
             <p className="notice">
               Konfirmasi baru membuat link baru dan menonaktifkan link
               sebelumnya.
@@ -216,7 +216,7 @@ export function ConfirmSend({
           </small>
         </div>
       )}
-      {r.confirmed_at && (
+      {r.has_active_link && (
         <details className="revoke-details">
           <summary>Nonaktifkan link pelanggan</summary>
           <p>Link aktif tidak dapat dibuka lagi setelah dinonaktifkan.</p>

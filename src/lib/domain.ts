@@ -91,6 +91,7 @@ export type Receipt = {
   created_at: string;
   updated_at: string;
   confirmed_at: string | null;
+  has_active_link?: boolean;
   receipt_items: Item[];
   delivery_logs?: {
     id: string;

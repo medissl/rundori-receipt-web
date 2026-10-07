@@ -26,8 +26,10 @@ export default async function Settings() {
     ],
     [
       "WhatsApp studio",
-      !!process.env.RUNDORI_WHATSAPP_NUMBER,
-      "Nomor kontak studio pada struk pelanggan.",
+      true,
+      process.env.RUNDORI_WHATSAPP_NUMBER
+        ? "Nomor kontak studio pada struk pelanggan."
+        : "Tautan WhatsApp resmi dari QR flyer Rundori digunakan pada struk.",
     ],
   ];
   return (

@@ -38,6 +38,12 @@ Disable public signup in the Supabase Auth dashboard; the app has no signup inte
 
 After schema changes run security and performance advisors. Initial unused-index notices are expected before traffic; foreign-key and status indexes are retained intentionally.
 
+The final security advisor reports only `auth_leaked_password_protection`: Supabase's breached-password check requires Pro ([documentation](https://supabase.com/docs/guides/auth/password-security)). It was left disabled to keep the requested Free plan. Table RLS and access checks have no security advisor findings.
+
+## Verified workflow
+
+On 7 October 2026, the owner-signed-in staff session created a marked sample with two items, Rp150,000 total, Rp50,000 paid and Rp100,000 outstanding. Four client-compressed photos were uploaded to private R2 (single before/after uploads and multiple selection), status was edited to ready, and confirmation produced a working customer receipt. Both token rotation and revocation were checked: superseded/revoked links became unavailable. The mobile receipt loaded its signed photos without horizontal overflow; internal staff notes were excluded. Optional paid-message providers were not exercised because credentials are absent.
+
 ## Cloudflare photo storage
 
 Private Standard bucket: `rundori-shoe-photos` (APAC). Photo gateway: `rundori-photo-gateway` using `cloudflare/wrangler.jsonc`. Generate a 32-byte signing secret and save it as Worker `PHOTO_GATEWAY_SECRET` and Vercel sensitive env `PHOTO_GATEWAY_SECRET`. `PHOTO_GATEWAY_URL` is the gateway's workers.dev HTTPS origin. Do not put secrets in Wrangler config.
